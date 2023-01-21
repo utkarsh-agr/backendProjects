@@ -2,20 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package com.module;
+package com.files;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.*;
-import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.*;
-import java.io.*;
-import java.sql.*;
 
 /**
  *
  * @author HP
  */
-@MultipartConfig
-public class Register extends HttpServlet {
+public class Servlet1 extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,49 +28,25 @@ public class Register extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Servlet1</title>");            
+            out.println("</head>");
+            out.println("<body>");
             String name=request.getParameter("user_name");
-            String email=request.getParameter("user_email");
-            String password=request.getParameter("user_password");
-            Part part=request.getPart("user_img");
-            String fileName=part.getSubmittedFileName();
-            try{
-                Thread.sleep(3000);
-                 Class.forName("com.mysql.cj.jdbc.Driver");
-                 String url="jdbc:mysql://localhost:3306/learn";
-                 Connection con=DriverManager.getConnection(url,"root","root");
-                 
-                 String q="insert into registrationmodule(name,email,password,imageName) values(?,?,?,?)";
-                 
-                 PreparedStatement pstmt=con.prepareStatement(q);
-                 
-                 InputStream is=part.getInputStream();
-                 
-                 byte[] data=new byte[is.available()];
-                 
-                 is.read(data);
-                 
-                 String path=request.getRealPath("/")+"img"+File.separator+fileName;
-//                 out.println(path);
-                 FileOutputStream fos=new FileOutputStream(path);
-                 
-                 fos.write(data);
-                 fos.close();
-                 
-                 pstmt.setString(1, name);
-                 pstmt.setString(2, email);
-                 pstmt.setString(3, password);
-                 pstmt.setString(4, fileName);
-                 //pstmt.setBinaryStream(4, is,is.available());
-                 
-                 
-                 pstmt.executeUpdate();
-                 con.close();
-                 out.println("done");
-            }catch(Exception e){
-                e.printStackTrace();
-                out.println("error");
-            }
-           
+            out.println("<h1>Your name is:"+name+" </h1>");
+            
+            //out.println("<a href='servlet2?user="+name+"'>Go to servlet 2</a>");
+            
+            out.println(""
+                    + "<form action='servlet2'>"
+                    + "<input type='hidden' name='user' value='"+name+"'/>"
+                    + "<button type='submit'>go to servlet2</button>"
+                    + "</form>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 

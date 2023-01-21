@@ -104,12 +104,12 @@
                 console.log("Page is ready.....");
 
                 $("#myform").on('submit', function (event) {
-                    event.preventDefault();
+                    event.preventDefault(); //This will prevent our jsp file to go to response of Register.java Servlet on form submission
 
-//                    var f = $(this).serialize();
-                      let f= new FormData(this);
+                 // var f = $(this).serialize();
+                    let f= new FormData(this);
 
-                    console.log(f);
+                    console.log(f); //This will print values inside variable f in the console
                  
 
                     $(".loader").show();
