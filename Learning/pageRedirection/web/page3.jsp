@@ -13,5 +13,6 @@
     </head>
     <body>
         <h1>This is page 3</h1>
+        <h3>You have been redirected to page 3</h3>
     </body>
 </html>
