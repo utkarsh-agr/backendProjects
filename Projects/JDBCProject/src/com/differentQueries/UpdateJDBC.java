@@ -27,7 +27,6 @@ public class UpdateJDBC {
             pstmt.setString(1,name);
             pstmt.setObject(2, ph);
             pstmt.setObject(3,roll);
-            
             pstmt.executeUpdate();
             System.out.println("Updated....");
             con.close();
